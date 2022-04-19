@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
 
   namespace :admin do
-    get 'products/index'
-    get 'products/show'
-    get 'products/new'
-    get 'products/edit'
+
+    resources :products, only: [:index, :show, :edit, :new, :create, :update]
+
   end
   devise_for :customers, skip: [:passwords], controllers: {
     registrations: 'public/registrations',
