@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(version: 2022_04_18_114158) do
     t.string "name"
     t.integer "price"
     t.text "caption"
+    t.boolean "sales_status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
