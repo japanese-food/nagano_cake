@@ -1,0 +1,19 @@
+<h1>商品一覧</h1>
+<% @products.each do |product| %>
+
+<p>商品ID</p>
+<span><%= product.id %></span>
+
+<p>商品名</p>
+<span><%= product.name %></span>
+
+<p>税抜価格</p>
+<span><%= product.price %></span>
+
+<p>ジャンル</p>
+<span><%= product.genre_id %></span>
+
+<p>ステータス</p>
+<span><%= product.sales_status %></span>
+
+<% end %>
