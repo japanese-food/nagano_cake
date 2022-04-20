@@ -1,4 +1,12 @@
-<h1>商品詳細</h1>
+<h1>商品詳細</h1><br>
+
+
+<% if @product.image.attached? %>
+  <%= image_tag @product.image %>
+<% else %>
+  <%= image_tag 'no-image'%>
+<% end %>
+
 
 
 <h4>商品名</h4>
@@ -17,6 +25,11 @@
 <p><%= @product.price %></p>
 
 <h4>販売ステータス</h4>
-<p><%= @product.sales_status %></p>
+<p><% if @product.sales_status %>
+    販売中
+  <% elsif %>
+    売切れ
+  <% end %>
+</p>
 
 <span><%= link_to "編集する",edit_admin_product_path(@product) %></span>

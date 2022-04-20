@@ -1,6 +1,6 @@
 <h1>商品新規登録</h1>
 
-<%= form_with model: @product_new do |f| %>
+<%= form_with model: @product_new, url: admin_products_path, method: :post do |f| %>
 
 <h4>商品画像</h4>
  <%= f.file_field :image, accept: 'image/*' %>
@@ -9,15 +9,13 @@
 <h4>商品説明</h4>
    <%= f.text_area :caption %>
 <h4>ジャンル</h4>
-   <%= form_with model: @genre do |f| %>
     <%= f.select :faculty, [["ケーキ", "ケーキ"], ["プリン", "プリン"], ["焼き菓子", "焼き菓子"], ["キャンディ", "キャンディ"]], include_blank: "選択して下さい" %>
-  <% end %>
-
 <h4>税抜価格</h4>
    <%= f.number_field :price %>
 
 <h4>販売ステータス</h4>
-   <%= f.select :sales_status ,[['販売中',true],['販売停止中',false]] %>
+  <%= f.radio_button :sales_status, "true" %>販売中
+  <%= f.radio_button :sales_status, "false" %>売切れ
 
 
 <%= f.submit '新規登録' %>
