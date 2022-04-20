@@ -1,10 +1,18 @@
-<h1>商品一覧(全○件)</h1>
+<h1>商品一覧(全<%= Product.all.count %>件)</h1>
 <% @products.each do |product| %>
 
-<span><%= product.image %></span>
+<span>
+  <% if product.image.attached? %>
+   <%= image_tag product.image %>
+  <% else %>
+   <%= image_tag 'no-image'%>
+  <% end %>
+</span>
 
-<span><%= product.name %></span>
+<span>
+  <%= link_to product.name, product_path(product) %>
+</span>
 
-<spn><%= product.price %></spn>
+<span><%= product.price %></span>
 
 <% end %>

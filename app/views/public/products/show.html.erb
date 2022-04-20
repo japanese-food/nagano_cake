@@ -1,5 +1,13 @@
+<% if @product.image.attached? %>
+  <%= image_tag @product.image %>
+<% else %>
+  <%= image_tag 'no-image'%>
+<% end %>
+
+
 <h1><%= @product.name %></h1>
-<h2><%= @product.caption %></h2>
-<h2><%= @product.price %></h2>
+<h4><%= @product.caption %></h4>
+<br>
+<h4>¥<%= @product.add_tax_price.to_s(:dalimited) %>(税込み)</h4>
 <h3>個数選択</h3>
 <h3>カートに入れる</h3>
