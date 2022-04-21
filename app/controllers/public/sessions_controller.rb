@@ -9,6 +9,17 @@ class Public::SessionsController < Devise::SessionsController
   def after_sign_out_path_for(resource)
     new_customer_session_path
   end
+
+  def reject_customer
+    @customer = Customer.find_by(email: paramas[:customer][:email])
+    if @customer
+      if @customer.valid_password?(params[:customer][:password]) && (@customer.is_deleted == false)
+        redirect_to new_customer_registration_path
+      else
+      end
+    end
+  end
+  # GET /resource/sign_in
   # GET /resource/sign_ins
   # def new
   #   super
