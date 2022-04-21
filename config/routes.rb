@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
 
   scope module: :public do
-    resource :customers, only: [:show, :edit, :update,]
+    resource :customers, only: [:show, :edit, :update]
     get 'customers/unsubscribe' => 'customers#unsubscribe', as: 'unsubscribe'
     patch 'customers/out' => 'customers#out', as: 'out'
+  end
+
+  scope module: :public do
+    resources :addresses, only: [:create, :index, :edit, :update, :destroy]
   end
 
 
@@ -16,14 +20,14 @@ Rails.application.routes.draw do
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: 'admin/sessions'
   }
-  
+
   scope module: :public do
     resources :orders, only: [ :index, :show, :new, :create] do
      post 'log'
      get 'thanx'
     end
   end
-  
+
   scope module: :public do
     root 'homes#top'
     get 'about', to: 'homes#about'
@@ -31,7 +35,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
 
-  
+
   namespace :admin do
      resources :genres, only: [ :index, :edit, :create, :update]
      resources :orders, only: [ :index, :show, :update]
@@ -46,7 +50,7 @@ Rails.application.routes.draw do
     resources :products, only: [:index, :show]
     resources :cart_items, only: [:index, :create, :destroy, :update, :destroy_all]
   end
- 
+
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
