@@ -1,0 +1,37 @@
+<h1>商品一覧</h1>
+<%= link_to "新規登録", new_admin_product_path %>
+<p>商品ID</p>
+<p>商品名</p>
+<p>税抜価格</p>
+<p>ジャンル</p>
+<p>ステータス</p>
+<% @products.each do |product| %>
+<span>
+<%= product.id %>
+</span>
+
+
+<span>
+<%= link_to product.name, admin_product_path(product) %>
+</span>
+
+
+<span>
+<%= product.price %>
+</span>
+
+
+<span>
+<%= product.genre_id %>
+</span>
+
+
+<span>
+<% if product.sales_status %>
+       販売中
+<% elsif %>
+      売切れ
+<% end %>
+</span>
+
+<% end %>
