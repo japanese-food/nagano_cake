@@ -3,36 +3,6 @@
 <h3>登録情報</h3>
 <%= link_to "編集する", edit_customers_path %>
 
-<div class="field">
-    <span>名前</span>
-    （姓）<%= @customer.sur_name %>
-    （名）<%= @customer.first_name %>
-  </div>
-
-  <div class="field">
-    <span>フリガナ</span>
-    （セイ）<%= @customer.sur_name_kana %>
-    （メイ）<%= @customer.first_name_kana %>
-  </div>
-
-  <div class="field">
-    <span>メールアドレス</span>
-    <%= @customer.email %>
-  </div>
-
-  <div class="field">
-    <span>郵便番号</span>
-    <%= @customer.post_code %>
-  </div>
-
-  <div class="field">
-    <span>住所</span>
-    <%= @customer.address %>
-  </div>
-
-  <div class="field">
-    <span>電話番号</span>
-    <%= @customer.phone_number %>
-  </div>
+<%= render 'show', customer: @customer %>
 
 <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
