@@ -7,3 +7,20 @@ ja:
     making: "製作中"
     completion: "製作完了"
 
+
+ja:
+ enums:
+  order:
+   payment_method:
+    credit_card: "クレジットカード"
+    transfer: "銀行振込"
+
+ja:
+ enums:
+  order:
+   status:
+    wait: "入金待ち"
+    confirmation: "入金確認"
+    making: "製作中"
+    preparation: "発送準備中"
+    completion: "発送済み"

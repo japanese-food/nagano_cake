@@ -7,16 +7,17 @@ Rails.application.routes.draw do
     sessions: 'public/sessions'
   }
 
-   resources :orders, only: [ :index, :show, :new, :create] do
-    post 'log'
-    get 'thanx'
-   end
-
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: 'admin/sessions'
   }
-
-
+  
+  scope module: :public do
+    resources :orders, only: [ :index, :show, :new, :create] do
+     post 'log'
+     get 'thanx'
+    end
+  end
+  
   scope module: :public do
     root 'homes#top'
     get 'about', to: 'homes#about'
