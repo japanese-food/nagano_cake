@@ -1,0 +1,4 @@
+<h1>え、退会すんの？</h1>
+
+<%= link_to "退会しない", customers_path %>
+<%= link_to "退会する", out_path, method: :patch, data: {confirm: "本当に退会しますか？"} %>
