@@ -15,9 +15,17 @@ class Public::CartItemsController < ApplicationController
 
   def destroy
    @cart_item = CartItem.find(params[:id])
-   @cart_item.customer_id = current_customer.id
+  # @cart_item.customer_id = current_customer.id
+  # @cart_item = current_customer.cart_item
+  # CartItem.find_by(cart_item_id: params[:cart_item_id], customer_id: current_customer.id)
+  # @cart_item.product_id = Product.find(params[:product_id])
    @cart_item.destroy
-   redirect_to cart_items_path
+   redirect_to  request.referer
+  end
+
+  def destroy_all
+    @cart_item = CartItem.destroy_all
+    redirect_to  request.referer
   end
 
 

@@ -5,5 +5,5 @@ class Product < ApplicationRecord
     (price * 1.1).floor
   end
 
-    has_many :cart_items
+    has_many :cart_items, dependent: :destroy
 end
