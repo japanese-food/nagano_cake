@@ -1,6 +1,5 @@
 class Public::CartItemsController < ApplicationController
   def index
-    @product =  Product.find_by(params[:product_id])
     @cart_items = current_customer.cart_items
     @total_price = 0
   end
@@ -37,8 +36,8 @@ class Public::CartItemsController < ApplicationController
 
   def update
     @cart_item = CartItem.find(params[:id])
-    @cart_item.update
-    @cart_item.save
+    @cart_item.update(quantity: params[:quantity])
+    redirect_to  request.referer
   end
 
 
