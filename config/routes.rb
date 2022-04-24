@@ -6,6 +6,10 @@ Rails.application.routes.draw do
     patch 'customers/out' => 'customers#out', as: 'out'
   end
 
+  namespace :admin do
+    resources :customers, only: [:index, :show, :edit, :update]
+  end
+
   scope module: :public do
     resources :addresses, only: [:create, :index, :edit, :update, :destroy]
   end
