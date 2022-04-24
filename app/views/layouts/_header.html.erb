@@ -1,4 +1,4 @@
-<header>
+<header class="shadow-sm">
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
       <a class="navbar-brand" href="/"><span><%= link_to "ながのcake", root_path %></span></a>
@@ -7,7 +7,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">
-          
+
         <% if customer_signed_in? %>
           <li>
             <%= link_to "マイページ", customers_path %>
