@@ -1,0 +1,39 @@
+ja:
+ enums:
+  order_detail:
+   making_status:
+    cannot: "着手不可"
+    wait: "製作待ち"
+    making: "製作中"
+    completion: "製作完了"
+
+
+ja:
+ enums:
+  order:
+   payment_method:
+    credit_card: "クレジットカード"
+    transfer: "銀行振込"
+
+ja:
+ enums:
+  order:
+   status:
+    wait: "入金待ち"
+    confirmation: "入金確認"
+    making: "製作中"
+    preparation: "発送準備中"
+    completion: "発送済み"
+
+ ja:
+  activerecord:
+   errors:
+    models:
+     address:
+      attributes:
+       name: "宛名"
+       blank: "入力してください"
+       post_code: "郵便番号"
+       blank: "入力してください"
+       address: "住所"
+       blank: "入力してください"

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_18_114158) do
+ActiveRecord::Schema.define(version: 2022_04_21_052448) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -38,6 +38,15 @@ ActiveRecord::Schema.define(version: 2022_04_18_114158) do
     t.integer "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "addresses", force: :cascade do |t|
+    t.integer "customer_id"
+    t.string "name"
+    t.string "post_code"
+    t.string "address"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "admins", force: :cascade do |t|
@@ -80,6 +89,12 @@ ActiveRecord::Schema.define(version: 2022_04_18_114158) do
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
   end
 
+  create_table "genres", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "order_details", force: :cascade do |t|
     t.integer "order_id"
     t.integer "product_id"
@@ -90,14 +105,27 @@ ActiveRecord::Schema.define(version: 2022_04_18_114158) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "orders", force: :cascade do |t|
+    t.integer "customer_id"
+    t.integer "delivery_post_code"
+    t.string "delivery_address"
+    t.string "delivery_name"
+    t.integer "postage"
+    t.integer "billing_amount"
+    t.integer "payment_method"
+    t.integer "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "products", force: :cascade do |t|
     t.integer "genre_id"
     t.string "name"
     t.integer "price"
     t.text "caption"
-    t.boolean "sales_status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "sales_status", default: false, null: false
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

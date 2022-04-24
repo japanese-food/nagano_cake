@@ -1,0 +1,28 @@
+<h1>ショッピングカート</h1>
+
+<p>カートを空にする</p>
+<p>商品名</p>
+<p>単価(税込み)</p>
+<p>数量</p>
+<p>小計</p>
+<p>削除する</p>
+<br>
+<p>合計金額</p>
+
+
+<% @cart_items.each do |cart_item| %>
+
+<p><%= cart_item.product.name %></p>
+
+<p><%= cart_item.product.with_tax_price %></p>
+
+<p><%= cart_item.quantity %></p>
+
+<p><%= cart_item.subtotal %></p>
+
+<% @total = @total + cart_item.subtotal %>
+
+<% end %>
+
+
+<%= link_to "買い物を続ける", root_path %>
