@@ -35,4 +35,9 @@
     <%= @customer.phone_number %>
   </div>
 
-<%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
+  <div>
+    <span>配送先</span>
+    <%= link_to "一覧を見る", addresses_path %>
+  </div>
+
+  <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
