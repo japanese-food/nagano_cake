@@ -36,11 +36,9 @@ class Public::CartItemsController < ApplicationController
   end
 
   def update
-    @cart_iteme = CartItem.find_by(params[:quantity])
-    # new_quantity = @cart_item.quantity
-    # @cart_item.update_attribute(:quantity, new_quantity)
-    # @cart_iteme.quantity.update
-    redirect_to  request.referer
+    @cart_item = CartItem.find(params[:id])
+    @cart_item.update
+    @cart_item.save
   end
 
 
