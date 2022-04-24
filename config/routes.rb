@@ -1,9 +1,17 @@
 Rails.application.routes.draw do
 
   scope module: :public do
-    resource :customers, only: [:show, :edit, :update,]
+    resource :customers, only: [:show, :edit, :update]
     get 'customers/unsubscribe' => 'customers#unsubscribe', as: 'unsubscribe'
     patch 'customers/out' => 'customers#out', as: 'out'
+  end
+
+  namespace :admin do
+    resources :customers, only: [:index, :show, :edit, :update]
+  end
+
+  scope module: :public do
+    resources :addresses, only: [:create, :index, :edit, :update, :destroy]
   end
 
 
@@ -49,7 +57,11 @@ Rails.application.routes.draw do
       end
     end
     resources :products, only: [:index, :show]
+
 end
+
+    resources :cart_items, only: [:index, :create, :destroy, :update, :destroy_all]
+  end
 
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

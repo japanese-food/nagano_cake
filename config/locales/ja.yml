@@ -24,3 +24,16 @@ ja:
     making: "製作中"
     preparation: "発送準備中"
     completion: "発送済み"
+
+ ja:
+  activerecord:
+   errors:
+    models:
+     address:
+      attributes:
+       name: "宛名"
+       blank: "入力してください"
+       post_code: "郵便番号"
+       blank: "入力してください"
+       address: "住所"
+       blank: "入力してください"

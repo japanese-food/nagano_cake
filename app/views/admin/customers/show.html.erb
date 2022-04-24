@@ -1,0 +1,7 @@
+<h2><%= @customer.sur_name %><%= @customer.first_name %>さんの会員情報</h2>
+
+<%= render 'show', customer: @customer %>
+
+<%= link_to "編集する", edit_admin_customer_path %>
+
+<%= link_to "一覧に戻る", admin_customers_path %>
