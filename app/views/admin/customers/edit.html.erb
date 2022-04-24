@@ -2,7 +2,8 @@
 
 <%= render 'error_message', resource: @customer %>
 
-<%= form_with model: @customer, url: customers_path do |f| %>
+<%= form_with model: @customer, url: admin_customer_path do |f| %>
+
   <div class="field">
     <%= f.label :名前 %>
     （姓）<%= f.text_field :sur_name %>
@@ -35,12 +36,13 @@
     <%= f.text_field :phone_number %>
   </div>
 
+  <div class="field">
+    <%= f.select :is_deleted, [['退会', true], ['有効', false]] %>
+  </div>
+
   <div class="actions">
     <%= f.submit "編集内容を保存" %>
   </div>
 <% end %>
 
-<%= link_to "戻る", customers_path %>
-
-<%= link_to "退会する", unsubscribe_path %>
-
+<%= link_to "顧客詳細に戻る", admin_customer_path(@customer) %>
