@@ -6,8 +6,17 @@
 
 
 <h1><%= @product.name %></h1>
+
 <h4><%= @product.caption %></h4>
 <br>
 <h4>¥<%= @product.add_tax_price.to_s(:dalimited) %>(税込み)</h4>
-<h3>個数選択</h3>
-<h3>カートに入れる</h3>
+
+<p>
+<%= form_with model: @cart_item, url: cart_items_path, method: :post do |f| %>
+<%= f.hidden_field :product_id, value: @product.id %>
+<%= f.select :quantity, [['1',1], ['2',2], ['3',3], ['4',4], ['5',5], ['6',6], ['7',7], ['8',8], ['9',9], ['10',10]], include_blank: "個数選択" %>
+<%= f.submit '新規登録' %>
+<% end %>
+</p>
+
+<h3><%= link_to "カートに入れる", cart_items_path %></h3>
