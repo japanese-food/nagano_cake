@@ -38,7 +38,7 @@ class Public::OrdersController < ApplicationController
         redirect_to 遷移したいページ 
       end
         @cart_items = current_customer.cart_items.all 
-      @total = @cart_items.inject(0) { |sum
+        @total = @cart_items.inject(0) { |sum
   end
 
   def create

@@ -18,15 +18,15 @@
     <div>
         <h3>お届け先</h3>
         <%= form_with model: @order, url: check アクションにつながるパス, local: true do |f| %>
-<!-- customer テーブルに登録されている住所の場合です -->
-  <%= f.radio_button :address_number, 1 %> <!-- address_number と定義して1～3の番号を check に送ります -->
-  <%= f.label :address_number_1, "ご自身の住所" %>
-  <%= current_customer.customer_address %>
+        <!-- customer テーブルに登録されている住所の場合です -->
+          <%= f.radio_button :address_number, 1 %> <!-- address_number と定義して1～3の番号を check に送ります -->
+          <%= f.label :address_number_1, "ご自身の住所" %>
+          <%= current_customer.customer_address %>
 
 <!-- 登録されたaddressから選んでもらう場合です -->
-  <%= f.radio_button :address_number, 2 %>
-  <%= f.label :address_number_2, "登録先の住所" %>
-  <%= f.collection_select(:registered, current_customer.addresses.all, :id, :address %>
+          <%= f.radio_button :address_number, 2 %>
+          <%= f.label :address_number_2, "登録先の住所" %>
+          <%= f.collection_select(:registered, current_customer.addresses.all, :id, :address %>
 <!-- registered として current_customer.address.all で取得した id を送ります。
      ユーザーに表示して選択してもらうのは address です -->
 <!-- ドロップダウンを選択したら自動でラベルも選択されるようにしたかったのですが、現状ではわかりませんでした -->
