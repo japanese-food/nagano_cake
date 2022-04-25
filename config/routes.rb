@@ -26,10 +26,9 @@ Rails.application.routes.draw do
   }
 
   scope module: :public do
-    resources :orders, only: [ :index, :show, :new, :create] do
-     post 'log'
+     post 'orders/check'
      get 'thanx'
-    end
+    resources :orders, only: [ :index, :show, :new, :create]
   end
 
   scope module: :public do

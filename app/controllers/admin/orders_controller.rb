@@ -1,4 +1,6 @@
 class Admin::OrdersController < ApplicationController
+
+
   def index
      @orders = Order.all
   end
@@ -15,8 +17,8 @@ class Admin::OrdersController < ApplicationController
        render :show
      end
   end
-  
-  
+
+
   private
 	def order_params
 		  params.require(:order).permit(:status)
