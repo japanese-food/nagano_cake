@@ -9,7 +9,7 @@
 <h4>商品説明</h4>
    <%= f.text_area :caption %>
 <h4>ジャンル</h4>
-   <!--%= f.collection_select : genre_id, genre.all, : genre_id, : genre.name, include_blank: "選択して下さい" %-->
+   <%= f.collection_select :genre_id, @genres, :id, :name, include_blank: "選択して下さい" %>
 <h4>税抜価格</h4>
    <%= f.number_field :price %>
 
