@@ -1,22 +1,23 @@
-<h4>ようこそながのCAKEへ！</h4><br>
-<h4>このサイトは、ケーキ販売のECサイトになります。</h4><br>
-<h4>会員でない方も商品の閲覧はできますが、</h4><br>
-<h4>購入には会員登録が必要となります。</h4><br>
 
-<h2>新着商品</h2>
+   <h4>ようこそながのCAKEへ！</h4>
+   <h4>このサイトは、ケーキ販売のECサイトになります。</h4>
+   <h4>会員でない方も商品の閲覧はできますが、</h4>
+   <h4>購入には会員登録が必要となります。</h4>
+ 
+ 
 
-<% @products.each do |product| %>
+  <h2>新着商品</h2>
 
-<span>
-  <% if product.image.attached? %>
+  <% @products.each do |product| %>
+
+   <% if product.image.attached? %>
    <%= image_tag product.image %>
-  <% else %>
+   <% else %>
    <%= image_tag 'no-image'%>
+   <% end %>
+   </span>
+   <span><%= product.name %></span>
+   <span><%= product.price %></span>
   <% end %>
-</span>
-<span><%= product.name %></span>
-<span><%= product.price %></span>
 
-<% end %>
-
-<%= link_to "全ての商品を見る>", products_path %>
+  <%= link_to "全ての商品を見る>", products_path %>

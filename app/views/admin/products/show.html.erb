@@ -19,7 +19,7 @@
 <p><%= @product.genre_id %></p>
 
 <h4>税込価格</h4>
-<p><%= @product.add_tax_price.to_s(:dalimited) %></p>
+<p><%= @product.with_tax_price %></p>
 
 <h4>（税抜価格）</h4>
 <p><%= @product.price %></p>
