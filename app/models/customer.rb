@@ -19,5 +19,6 @@ class Customer < ApplicationRecord
   validates :phone_number, presence: true
 
   has_many :cart_items
+  has_many :orders
   
 end
