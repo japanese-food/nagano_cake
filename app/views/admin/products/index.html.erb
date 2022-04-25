@@ -1,37 +1,39 @@
 <h1>商品一覧</h1>
-<%= link_to "新規登録", new_admin_product_path %>
-<p>商品ID</p>
-<p>商品名</p>
-<p>税抜価格</p>
-<p>ジャンル</p>
-<p>ステータス</p>
-<% @products.each do |product| %>
-<span>
-<%= product.id %>
-</span>
 
-
-<span>
-<%= link_to product.name, admin_product_path(product) %>
-</span>
-
-
-<span>
-<%= product.price %>
-</span>
-
-
-<span>
-<%= product.genre_id %>
-</span>
-
-
-<span>
-<% if product.sales_status %>
-       販売中
-<% elsif %>
-      売切れ
+<%= link_to new_admin_product_path do %>
+ <i class="fas fa-plus-circle"></i>
 <% end %>
-</span>
 
-<% end %>
+<table class="table">
+   <thead class="table-light">
+    <tr>
+     <th>商品ID</th>
+     <th>商品名</th>
+     <th>税抜価格</th>
+     <th>ジャンル</th>
+     <th>ステータス</th>
+    </tr>
+  </thead>
+  <tbody>
+   <% @products.each do |product| %>
+   <tr>
+    <td><%= product.id %></td>
+
+    <td><%= link_to product.name, admin_product_path(product) %></td>
+
+    <td><%= number_to_currency(product.price, strip_insignificant_zeros: true, :unit => "￥")  %></td>
+
+    <td><%= product.genre.name %></td>
+
+    <td><% if product.sales_status %>
+        <p class="text-success">販売中</p>
+         <% elsif %>
+        <p class="text-black-50">販売停止中</p>
+        <% end %></td>
+   </tr>
+   <% end %>
+  </tbody>
+
+</table>
+<%= paginate @products %>
+
