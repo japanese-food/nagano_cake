@@ -1,12 +1,7 @@
 <h1>商品詳細</h1><br>
 
 
-<% if @product.image.attached? %>
-  <%= image_tag @product.image %>
-<% else %>
-  <%= image_tag 'no-image'%>
-<% end %>
-
+ <%= image_tag @product.get_image(200, 200) %>
 
 
 <h4>商品名</h4>
@@ -19,10 +14,10 @@
 <p><%= @product.genre.name %></p>
 
 <h4>税込価格</h4>
-<p><%= @product.with_tax_price %></p>
+<p><%= number_to_currency(@product.with_tax_price, strip_insignificant_zeros: true, :unit => "￥") %></p>
 
-<h4>（税抜価格）</h4>
-<p><%= @product.price %></p>
+<h6>（税抜価格）</h6>
+<p><%= number_to_currency(@product.price, strip_insignificant_zeros: true, :unit => "￥") %></p>
 
 <h4>販売ステータス</h4>
 <p><% if @product.sales_status %>
