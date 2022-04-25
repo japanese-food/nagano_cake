@@ -10,33 +10,33 @@
         <th>小計</th>
       </tr>
     </thead>
-  
+
     <tbody>
-      <% @cart_items.each do |cart| %>
+      <% @cart_items.each do |cart_item| %>
         <tr>
-        <td><%= cart.item.name %> </td>
-        <td><%= (cart.item.price).to_s(:delimited) %></td>
-        <td><%= cart.quantity %> </td>
-        <td><%= (cart.item.price*cart.quantity).to_s(:delimited) %> </td>
+        <td><%= cart_item.product.name %> </td>
+        <td><%= (cart_item.product.price).to_s(:delimited) %></td>
+        <td><%= cart_item.quantity %> </td>
+        <td><%= (cart_item.product.price*cart_item.quantity).to_s(:delimited) %> </td>
         </tr>
       <% end %>
     </tbody>
   </table>
 </div>
-  
+
   <div>
     <table>
         <tr>
           <th>送料</th>
-          <td><%= order.postage %></td>
+          <td><%= @order.postage %></td>
         </tr>
         <tr>
           <th>商品合計</th>
-          <td><%= order.(cart.item.price*cart.quantity).to_s(:delimited) %></td>
+          <td><%= @total.to_s(:delimited) %></td>
         </tr>
         <tr>
           <th>請求金額</th>
-          <td><%= order.billing_amount %></td>
+          <td><%= @order.billing_amount %></td>
         </tr>
     </table>
   </div>
@@ -44,11 +44,11 @@
 <div>
   <div>
 <p>支払方法</p>
-<%= @total.to_s(:delimited) %> 
+<%= @total.to_s(:delimited) %>
   </div>
   <div>
 <p>お届け先</p>
-<%= @order.address %>
+<%= @order.delivery_address %>
   </div>
 </div>
 

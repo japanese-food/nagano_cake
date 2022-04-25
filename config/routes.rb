@@ -26,10 +26,9 @@ Rails.application.routes.draw do
   }
 
   scope module: :public do
-    resources :orders, only: [ :index, :show, :new, :create] do
-     post 'log'
+     post 'orders/check'
      get 'thanx'
-    end
+    resources :orders, only: [ :index, :show, :new, :create]
   end
 
   scope module: :public do
@@ -51,9 +50,17 @@ Rails.application.routes.draw do
   end
 
   scope module: :public do
+    resources :cart_items, only: [:index, :create, :destroy, :update,] do
+       collection do
+        delete 'destroy_all'
+      end
+    end
     resources :products, only: [:index, :show]
-    resources :cart_items, only: [:index, :create, :destroy, :update, :destroy_all]
+
+
   end
+   get "search" => "searches#search"
+
 
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
