@@ -3,21 +3,17 @@
    <h4>このサイトは、ケーキ販売のECサイトになります。</h4>
    <h4>会員でない方も商品の閲覧はできますが、</h4>
    <h4>購入には会員登録が必要となります。</h4>
- 
- 
+
+
 
   <h2>新着商品</h2>
 
   <% @products.each do |product| %>
 
-   <% if product.image.attached? %>
-   <%= image_tag product.image %>
-   <% else %>
-   <%= image_tag 'no-image'%>
-   <% end %>
+   <%= image_tag product.get_image(100, 100) %>
    </span>
    <span><%= product.name %></span>
-   <span><%= product.price %></span>
+   <span><%= number_to_currency(product.price, strip_insignificant_zeros: true, :unit => "￥")  %></span>
   <% end %>
 
   <%= link_to "全ての商品を見る>", products_path %>

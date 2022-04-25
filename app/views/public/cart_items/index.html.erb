@@ -13,7 +13,7 @@
 
   <p><%= cart_item.product.name %></p>
 
-<p><%= cart_item.product.with_tax_price %></p>
+<p><%= number_to_currency(cart_item.product.with_tax_price, strip_insignificant_zeros: true, :unit => "￥") %></p>
 
 <p><%= cart_item.quantity %></p>
 
@@ -22,7 +22,7 @@
     <%= f.submit '変更' %>
     <% end %>
 
-<p><%= cart_item.subtotal %></p>
+<p><%= number_to_currency(cart_item.subtotal, strip_insignificant_zeros: true, :unit => "￥") %></p>
 
 <p><%= button_to "Delete", cart_item_path(cart_item), method: :delete %></p>
    <%#= link_to "削除する", controller: "public/cart_items", action: "destroy", id: cart_item %>
@@ -31,7 +31,7 @@
 
 <% end %>
 
-<%= @total_price %>
+<%= number_to_currency(@total_price, strip_insignificant_zeros: true, :unit => "￥") %>
 
 
 <%= link_to "買い物を続ける", root_path %>

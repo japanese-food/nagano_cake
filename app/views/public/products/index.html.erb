@@ -2,17 +2,15 @@
 <% @products.each do |product| %>
 
 <span>
-  <% if product.image.attached? %>
-   <%= image_tag product.image %>
-  <% else %>
-   <%= image_tag 'no-image'%>
-  <% end %>
+
+   <%= image_tag product.get_image(200, 200) %>
+
 </span>
 
 <span>
   <%= link_to product.name, product_path(product) %>
 </span>
 
-<span><%= product.price %></span>
+<span><%= number_to_currency(product.price, strip_insignificant_zeros: true, :unit => "￥")  %></span>
 
 <% end %>

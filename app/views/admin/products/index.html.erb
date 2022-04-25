@@ -5,6 +5,7 @@
 <p>税抜価格</p>
 <p>ジャンル</p>
 <p>ステータス</p>
+
 <% @products.each do |product| %>
 <span>
 <%= product.id %>
@@ -17,7 +18,7 @@
 
 
 <span>
-<%= product.price %>
+<%= number_to_currency(product.price, strip_insignificant_zeros: true, :unit => "￥")  %>
 </span>
 
 
