@@ -1,64 +1,82 @@
-<h2>注文履歴詳細</h2>
-
-<div>
-    
-  <div>
+<div class ="row">
+ <%= form_for(@order, url:admin_order_path(@order), method: :put) do |f| %> 
+  <h2>注文履歴詳細</h2>
       
-     <div>
-         
-         <div>
-             <div>購入者</div>
-             <div><%= order.name %></div>
-         </div>
-         <div>
-             <div>注文日</div>
-             <div> <%= full_address(@order) %></div>
-         </div>
-         <div>
-             <div>配送先</div>
-             <div> <%= delivery_address(@order) %></div>
-         </div>
-         <div>
-             <div>支払方法</div>
-             <div> <%= @order.payment_method %></div>
-         </div>
-         <div>
-              <%= form_for(@order, url: admin_order_path(@order, method: :put) do |f| %>
-             <div>注文ステータス</div>
-             <div><%= f.select :status, Order.statuses.keys %></div>
-             <div><%= f.submit "更新" %></div>
-         </div>
-     </div>
+         <table>
+             
+             <tr>
+                 <th>購入者</th>
+                 <td>
+                     <%= @order.customer.sur_name %>
+                     <%= @order.customer.first_name %>
+                 </td>
+             </tr>
+             <tr>
+                 <th>注文日</th>
+                 <td> <%= @order.created_at.strftime('%Y/%m/%d')  %></td>
+             </tr>
+             <tr>
+                 <th>配送先</th>
+                 <td> 
+                     <%= @order.delivery_post_code %>
+                     <%= @order.delivery_address %><br>
+                     <%= @order.delivery_name %>
+                 </td>
+             </tr>
+             <tr>
+                 <th>支払方法</th>
+                 <td> <%= @order.payment_method %></td>
+             </tr>
+             <tr>
+                
+                 <th>注文ステータス</th>
+                 <td>
+                     <%= f.select :status, Order.statuses.keys %>
+                     <%= f.submit "更新" %>
+                 </td>
+             </tr>
+         </table>
 
 
-            <div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>商品名</th>
-                            <th>単価（税込）</th>
-                            <th>数量</th>
-                            <th>小計</th>
-                            <th>制作ステータス</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div>商品合計</div>
-              
-            　　<div>送料</div>
-            
-            　　<div>請求金額合計</div>
-            
-            </div>
-    </div>
+    
+        <table>
+            <thead>
+                <tr>
+                    <th>商品名</th>
+                    <th>単価（税込）</th>
+                    <th>数量</th>
+                    <th>小計</th>
+                    <th>制作ステータス</th>
+                </tr>
+            </thead>
+            <tbody>
+                 <%  @order_details.each do |order_detail| %>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <%= f.select :making_status, Order_detail.making_statuses.keys %>
+                        <%= f.submit "更新" %>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+                
+        <table>
+            <tr>
+              <th>商品合計</th>
+              <td>円</td>
+            </tr>
+            <tr>
+              <th>送料</th>
+              <td><%= @order.postage %>円</td>
+            </tr>
+            <tr>
+              <th>請求金額合計</th>
+              <td><%= @order.billing_amount %>円</td>
+            </tr>
+    　　</table>
+ <% end %>           
 </div>
