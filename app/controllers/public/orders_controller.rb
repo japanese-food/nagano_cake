@@ -16,18 +16,16 @@ class Public::OrdersController < ApplicationController
 
 
      elsif params[:order][:address_number] == "2"
-        @order.delivery_name = Address.find(params[:order][:registered]).name
-        @order.delivery_address = Address.find(params[:order][:registered]).address
-        @order.delivery_post_code = Address.find(params[:order][:registered]).post_code
+        @order.delivery_name = Address.find_by(params[:order][:registered]).name
+        @order.delivery_address = Address.find_by(params[:order][:registered]).address
+        @order.delivery_post_code = Address.find_by(params[:order][:registered]).post_code
 
      elsif params[:order][:address_number] == "3"
+         @order.customer_id = current_customer.id
          address_new = current_customer.addresses.new(address_params)
-          if address_new.save
-          else
-           render :new
-          end
+         address_new.save
      else
-       redirect_to order_thanx_path
+       redirect_to orders_check_path
      end
        @cart_items = current_customer.cart_items
   end
@@ -35,6 +33,7 @@ class Public::OrdersController < ApplicationController
     def create
       @order = Order.new(order_params)
       @order.customer_id = current_customer.id
+
       @order.save
   	  redirect_to orders_thanx_path
     end
@@ -48,8 +47,8 @@ class Public::OrdersController < ApplicationController
   end
 
   def show
-     @order = Order.find(params[:id])
-     @order_details = @order.order_details
+    @order = Order.find(params[:id])
+    @order_details = @order.order_details
   end
 
   def thanx
