@@ -1,31 +1,39 @@
-<div class="field">
-    <span>名前</span>
-    （姓）<%= customer.sur_name %>
-    （名）<%= customer.first_name %>
-  </div>
-
-  <div class="field">
-    <span>フリガナ</span>
-    （セイ）<%= customer.sur_name_kana %>
-    （メイ）<%= customer.first_name_kana %>
-  </div>
-
-  <div class="field">
-    <span>メールアドレス</span>
-    <%= customer.email %>
-  </div>
-
-  <div class="field">
-    <span>郵便番号</span>
-    <%= customer.post_code %>
-  </div>
-
-  <div class="field">
-    <span>住所</span>
-    <%= customer.address %>
-  </div>
-
-  <div class="field">
-    <span>電話番号</span>
-    <%= customer.phone_number %>
-  </div>
+<table class="table table-bordered">
+  <tbody>
+    <tr>
+      <th>名前</th>
+      <td>
+      （姓）<%= customer.sur_name %>
+      （名）<%= customer.first_name %>
+      </td>
+    </tr>
+    
+    <tr>
+      <th>フリガナ</th>
+      <td>
+      （セイ）<%= customer.sur_name_kana %>
+      （メイ）<%= customer.first_name_kana %>
+      </td>
+    </tr>
+  
+    <tr>
+      <th>メールアドレス</th>
+      <td><%= customer.email %></td>
+    </tr>
+  
+    <tr>
+      <th>郵便番号</th>
+      <td><%= customer.post_code %></td>
+    </tr>
+  
+    <tr>
+      <th>住所</th>
+      <td><%= customer.address %></td>
+    </div>
+  
+    <tr>
+      <th>電話番号</th>
+      <td><%= customer.phone_number %></td>
+    </tr>
+  </tbody>
+</table>

@@ -1,16 +1,26 @@
-<h1>商品一覧(全<%= Product.all.count %>件)</h1>
-<% @products.each do |product| %>
+<div class="container">
+ <div class ="row" >  
+   <div class="col-xs-9">
 
-<span>
-
-   <%= image_tag product.get_image(200, 200) %>
-
-</span>
-
-<span>
-  <%= link_to product.name, product_path(product) %>
-</span>
-
-<span><%= number_to_currency(product.price, strip_insignificant_zeros: true, :unit => "￥")  %></span>
-
-<% end %>
+        <h1>商品一覧(全<%= Product.all.count %>件)</h1>
+        
+      <div class="row">
+        
+            <% @products.each do |product| %>
+            <span>
+               <%= image_tag product.get_image(200, 200) %>
+            </span>
+        
+            <span>
+              <%= link_to product.name, product_path(product) %>
+            </span>
+            
+            <span><%= number_to_currency(product.price, strip_insignificant_zeros: true, :unit => "￥")  %></span>
+            
+      
+            
+        <% end %>
+      </div>
+    </div>
+ </div>
+</div>
