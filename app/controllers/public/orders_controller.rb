@@ -48,10 +48,6 @@ class Public::OrdersController < ApplicationController
       end
       @cart_items.destroy_all
   	  redirect_to orders_thanx_path
-
-
-
-
     end
 
 
@@ -59,7 +55,12 @@ class Public::OrdersController < ApplicationController
 
 
   def index
-     @order = current_customer.orders
+     @orders = current_customer.orders
+     @orders.each do |order_detail|
+     @product_name = order_detail.product.name
+   end
+
+
   end
 
   def show
