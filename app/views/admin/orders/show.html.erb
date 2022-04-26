@@ -7,8 +7,7 @@
              <tr>
                  <th>購入者</th>
                  <td>
-                     <%= @order.customer.sur_name %>
-                     <%= @order.customer.first_name %>
+                     <%= @order.name %>
                  </td>
              </tr>
              <tr>
@@ -52,14 +51,15 @@
             <tbody>
                  <%  @order_details.each do |order_detail| %>
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td><%= order_detail.product.name %></td>
+                    <td><%= tax_price(order_detail.product.tax_out_price).to_s(:delimited) %></td>
+                    <td><%= order_detail.quantity %></td></td>
+                    <td><%= sub_price(order_detail).to_s(:delimited) %></td>
                     <td>
                         <%= f.select :making_status, Order_detail.making_statuses.keys %>
                         <%= f.submit "更新" %>
                     </td>
+                 <% end %>
                 </tr>
             </tbody>
         </table>
@@ -67,15 +67,15 @@
         <table>
             <tr>
               <th>商品合計</th>
-              <td>円</td>
+              <td><%= total_price(@order_details).to_s(:delimited) %></td>
             </tr>
             <tr>
               <th>送料</th>
-              <td><%= @order.postage %>円</td>
+              <td><%= @order.postage.to_s(:delimited) %></td>
             </tr>
             <tr>
               <th>請求金額合計</th>
-              <td><%= @order.billing_amount %>円</td>
+              <td><%= @order.total_price.to_s(:delimited) %></td>
             </tr>
     　　</table>
  <% end %>           
