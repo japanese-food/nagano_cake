@@ -1,23 +1,43 @@
-<h1>商品新規登録</h1>
-
-<%= form_with model: @product_new, url: admin_products_path, method: :post do |f| %>
-
-<h4>商品画像</h4>
- <%= f.file_field :image, accept: 'image/*' %>
-<h4>商品名</h4>
-   <%= f.text_field :name %>
-<h4>商品説明</h4>
-   <%= f.text_area :caption %>
-<h4>ジャンル</h4>
-   <%= f.collection_select :genre_id, @genres, :id, :name, include_blank: "選択して下さい" %>
-<h4>税抜価格</h4>
-   <%= f.number_field :price %>
-
-<h4>販売ステータス</h4>
-  <%= f.radio_button :sales_status, "true" %>販売中
-  <%= f.radio_button :sales_status, "false" %>売切れ
-
-
-<%= f.submit '新規登録' %>
-
-<% end %>
+<div class="container takasa">
+    
+    <div class="row">
+        
+      <div class="col-xs-12">
+          
+        <h1>商品新規登録</h1>
+       <div class="col-xs-6">
+            <%= form_with model: @product_new, url: admin_products_path, method: :post do |f| %>
+            <div class="form-group">
+            <h4>商品画像</h4>
+             <%= f.file_field :image, accept: 'image/*' %>
+            </div>
+            <div class="form-group">
+            <h4>商品名</h4>
+               <%= f.text_field :name %>
+            </div>
+            <div class="form-group">
+            <h4>商品説明</h4>
+               <%= f.text_area :caption %>
+            </div>
+            <div class="form-group">
+            <h4>ジャンル</h4>
+               <%= f.collection_select :genre_id, @genres, :id, :name, include_blank: "選択して下さい" %>
+            </div>
+            <div class="form-group">
+            <h4>税抜価格</h4>
+               <%= f.number_field :price %>
+            </div>
+            <div class="for,-group">
+            <h4>販売ステータス</h4>
+              <%= f.radio_button :sales_status, "true" %>販売中
+              <%= f.radio_button :sales_status, "false" %>売切れ
+            </div>
+            <br>
+            <br>
+            <%= f.submit '新規登録', class:"btn btn-success" %>
+            
+            <% end %>
+       </div>
+      </div>
+    </div>
+</div>
