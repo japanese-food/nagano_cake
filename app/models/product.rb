@@ -7,6 +7,7 @@ class Product < ApplicationRecord
 
     has_many :cart_items, dependent: :destroy
     belongs_to :genre
+    has_many :order_details
 
     def get_image(width, height)
     unless image.attached?
@@ -15,8 +16,8 @@ class Product < ApplicationRecord
     end
      image.variant(resize_to_limit: [width, height]).processed
     end
-    
-    
+
+
      def self.looks(search, word)
     if search == "perfect_match"
       @product = Product.where("name LIKE?", "#{word}")
@@ -29,6 +30,6 @@ class Product < ApplicationRecord
     else
       @product = Product.all
     end
-     end  
+     end
 
 end
