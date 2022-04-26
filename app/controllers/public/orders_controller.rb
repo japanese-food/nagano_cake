@@ -8,36 +8,37 @@ class Public::OrdersController < ApplicationController
 
   def check
      @order = Order.new(order_params)
+     @total_price = 0
      if params[:order][:address_number] == "1"
        @order.delivery_name = current_customer.sur_name
        @order.delivery_address = current_customer.address
+       @order.delivery_post_code = current_customer.post_code
 
 
      elsif params[:order][:address_number] == "2"
-        @order.name = Address.find(params[:order][:registered]).name
-        @order.address = Address.find(params[:order][:registered]).address
+        @order.delivery_name = Address.find(params[:order][:registered]).name
+        @order.delivery_address = Address.find(params[:order][:registered]).address
+        @order.delivery_post_code = Address.find(params[:order][:registered]).post_code
 
      elsif params[:order][:address_number] == "3"
          address_new = current_customer.addresses.new(address_params)
-         if address_new.save
-         else
+          if address_new.save
+          else
            render :new
-         end
+          end
      else
        redirect_to order_thanx_path
      end
        @cart_items = current_customer.cart_items
-       @total = @cart_items.inject(0) { |sum, item| sum + item.subtotal }
   end
 
-   def create
+    def create
       @order = Order.new(order_params)
-        if @order.save
-    	  redirect_to order_log_path
-    	else
-    	  render :new
-    	end
-   end
+      @order.customer_id = current_customer.id
+      @order.save
+  	  redirect_to orders_thanx_path
+    end
+
 
 
 
@@ -61,11 +62,11 @@ class Public::OrdersController < ApplicationController
    private
 
   def order_params
-    params.require(:order).permit(:post_code, :payment_method, :total_price, :delivery_post_code, :delivery_address, :delivery_name)
+    params.require(:order).permit(:postage, :billing_amount, :status, :delivery_post_code, :payment_method, :delivery_address, :delivery_name)
   end
 
   def address_params
-   params.require(:order).permit(:name, :address)
+   params.require(:order).permit(:name, :address, :post_code)
   end
 
 end
