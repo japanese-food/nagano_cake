@@ -1,25 +1,29 @@
 <div class="container takasa">
-          
-       <h4>ようこそながのCAKEへ！</h4>
-       <h4>このサイトは、ケーキ販売のECサイトになります。</h4>
-       <h4>会員でない方も商品の閲覧はできますが、</h4>
-       <h4>購入には会員登録が必要となります。</h4>
-       
-      <br>
-
-
-
-  <h2>新着商品</h2>
-
-
-  <% @products.each do |product| %>
-
-   <span><%= image_tag product.get_image(100, 100) %></span>
-   
-   <span><%= product.name %></span>
-  
-   <span><%= number_to_currency(product.price, strip_insignificant_zeros: true, :unit => "￥")  %></span>
-  <% end %>
-  <br>
-  <%= link_to "全ての商品を見る>", products_path %>
+  <div class="row">
+    <div class="d-flex align-items-start flex-column bd-highlight mb-3" style="height: 200px;">
+      <div class="col-12">
+        <div class="mb-auto p-2 bd-highlight">
+         <h4>ようこそながのCAKEへ！</h4>
+         <h4>このサイトは、ケーキ販売のECサイトになります。</h4>
+         <h4>会員でない方も商品の閲覧はできますが、</h4>
+         <h4>購入には会員登録が必要となります。</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+      <h2>新着商品</h2>
+      <% @products.each do |product| %>
+      <div class="col-md-3">
+        <div class="card"%>
+          <%= image_tag product.get_image(100, 100) %>
+          <div class="card-body text-center">
+           <div class="card-title"><%= product.name %></div>
+           <p class="card-text"><%= number_to_currency(product.price, strip_insignificant_zeros: true, :unit => "￥")  %></div>
+        </div>
+      </div>
+           <% end %>
+    </div>
+    <%= link_to "全ての商品を見る>", products_path %>
+  </div>
 </div>

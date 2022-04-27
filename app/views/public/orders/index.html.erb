@@ -21,7 +21,7 @@
           </td>
           <td><%= order.delivery_post_code %><%= order.delivery_address %><%= order.delivery_name %></td>
           <td><%= @product_name %></td>
-          <td><%= order.billing_amount %></td>
+          <td><%= number_to_currency(order.billing_amount, strip_insignificant_zeros: true, :unit => "￥") %></td>
           <td><%= order.status %></td>
           <td><%= link_to "注文詳細", order_path(order) %></td>
           </tr>
