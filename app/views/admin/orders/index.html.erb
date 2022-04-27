@@ -49,11 +49,17 @@
         <% @orders.each do |order| %>
           <tr>
           <td><%= link_to admin_order_path(order) do %>
-              <%= order.created_at.strftime('%Y/%m/%d') %>
+              <%= order.created_at.strftime('%Y/%m/%d %H:%M') %>
               <% end %></td>
           <td><%= order.customer.sur_name %><%= order.customer.first_name %></td>
-          <td><%= order.billing_amount %></td>
-          <td><%#= order.order_status %></td>
+          <td>
+            <% quantity = 0 %>
+            <% order.order_details.each do |order_detail| %>
+            <% quantity += order_detail.amount %>
+            <% end %>
+            <%= quantity %>
+          </td>
+          <td><%= order.status %></td>
           </tr>
         <% end %>
       </tbody>
