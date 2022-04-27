@@ -14,7 +14,4 @@ class Admin::OrderDetailsController < ApplicationController
 		  params.require(:order_detail).permit(:product_id, :making_status, :price, :amount)
 	end
 
-# 	def order_params
-	 #params.require(:order).permit(:postage, :billing_amount, :status, :delivery_post_code, :payment_method, :delivery_address, :delivery_name)
-  # end
 end

@@ -19,8 +19,15 @@
           <td>
               <%= order.created_at.strftime('%Y/%m/%d') %>
           </td>
-          <td><%= order.delivery_post_code %><%= order.delivery_address %><%= order.delivery_name %></td>
-          <td><%= @product_name %></td>
+          <td><%= order.delivery_post_code %>
+              <%= order.delivery_address %>
+              <%= order.delivery_name %>
+          </td>
+          <td>
+            <% order.order_details.each do |order_detail| %>
+            <%= order_detail.product.name %>
+            <% end %>
+          </td>
           <td><%= order.billing_amount %></td>
           <td><%= order.status %></td>
           <td><%= link_to "注文詳細", order_path(order) %></td>
