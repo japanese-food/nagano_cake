@@ -1,41 +1,45 @@
 <div class="container">
+ <div class="row">
+  <div class="col-xs-12">
 
-<h1>商品一覧</h1>
+     <h1>商品一覧</h1>
 
-<%= link_to new_admin_product_path do %>
- <i class="fas fa-plus-circle"></i>
-<% end %>
+     <%= link_to new_admin_product_path do %>
+      <i class="fas fa-plus-circle"></i>
+     <% end %>
 
-<table class="table">
-   <thead class="table-light">
-    <tr>
-     <th>商品ID</th>
-     <th>商品名</th>
-     <th>税抜価格</th>
-     <th>ジャンル</th>
-     <th>ステータス</th>
-    </tr>
-  </thead>
-  <tbody>
-   <% @products.each do |product| %>
-   <tr>
-    <td><%= product.id %></td>
+     <table class="table">
+        <thead class="table-light">
+         <tr>
+          <th>商品ID</th>
+          <th>商品名</th>
+          <th>税抜価格</th>
+          <th>ジャンル</th>
+          <th>ステータス</th>
+         </tr>
+       </thead>
+       <tbody>
+        <% @products.each do |product| %>
+        <tr>
+         <td><%= product.id %></td>
 
-    <td><%= link_to product.name, admin_product_path(product) %></td>
+         <td><%= link_to product.name, admin_product_path(product) %></td>
 
-    <td><%= number_to_currency(product.price, strip_insignificant_zeros: true, :unit => "￥")  %></td>
+         <td><%= number_to_currency(product.price, strip_insignificant_zeros: true, :unit => "￥")  %></td>
 
-    <td><%= product.genre.name %></td>
+         <td><%= product.genre.name %></td>
 
-    <td><% if product.sales_status %>
-        <p class="text-success">販売中</p>
-         <% elsif %>
-        <p class="text-black-50">販売停止中</p>
-        <% end %></td>
-   </tr>
-   <% end %>
-  </tbody>
+         <td><% if product.sales_status %>
+             <p class="text-success">販売中</p>
+              <% elsif %>
+             <p class="text-black-50">販売停止中</p>
+             <% end %></td>
+        </tr>
+        <% end %>
+       </tbody>
 
-</table>
-<%= paginate @products %>
+     </table>
+     <%= paginate @products %>
+  </div>
+ </div>
 </div>
