@@ -23,7 +23,7 @@
 
     <td><%= link_to product.name, admin_product_path(product) %></td>
 
-    <td><%= number_to_currency(product.price, strip_insignificant_zeros: true, :unit => "￥")  %></td>
+    <td><%= number_to_currency(product.price, strip_insignificant_zeros: true, :unit => "￥") %></td>
 
     <td><%= product.genre.name %></td>
 
