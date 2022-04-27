@@ -16,18 +16,16 @@ class Public::OrdersController < ApplicationController
 
 
      elsif params[:order][:address_number] == "2"
-        @order.delivery_name = Address.find(params[:order][:registered]).name
-        @order.delivery_address = Address.find(params[:order][:registered]).address
-        @order.delivery_post_code = Address.find(params[:order][:registered]).post_code
+        @order.delivery_name = Address.find_by(params[:order][:registered]).name
+        @order.delivery_address = Address.find_by(params[:order][:registered]).address
+        @order.delivery_post_code = Address.find_by(params[:order][:registered]).post_code
 
      elsif params[:order][:address_number] == "3"
+         @order.customer_id = current_customer.id
          address_new = current_customer.addresses.new(address_params)
-          if address_new.save
-          else
-           render :new
-          end
+         address_new.save
      else
-       redirect_to order_thanx_path
+       redirect_to orders_check_path
      end
        @cart_items = current_customer.cart_items
   end
@@ -36,6 +34,19 @@ class Public::OrdersController < ApplicationController
       @order = Order.new(order_params)
       @order.customer_id = current_customer.id
       @order.save
+
+  	  @cart_items = current_customer.cart_items
+
+  	  @cart_items.each do |cart_item|
+  	    order_detail = OrderDetail.new
+  	    order_detail.product_id = cart_item.product_id
+  	    order_detail.price = cart_item.product.price
+  	    order_detail.amount = cart_item.quantity
+  	    order_detail.order_id = @order.id
+  	    order_detail.making_status = 1
+  	    order_detail.save
+      end
+      @cart_items.destroy_all
   	  redirect_to orders_thanx_path
     end
 
@@ -44,12 +55,17 @@ class Public::OrdersController < ApplicationController
 
 
   def index
-     @order = current_customer.orders
+     @orders = current_customer.orders
+     @orders.each do |order_detail|
+     @product_name = order_detail.product.name
+   end
+
+
   end
 
   def show
-     @order = Order.find(params[:id])
-     @order_details = @order.order_details
+    @order = Order.find(params[:id])
+    @order_details = @order.order_details
   end
 
   def thanx
@@ -62,7 +78,7 @@ class Public::OrdersController < ApplicationController
    private
 
   def order_params
-    params.require(:order).permit(:postage, :billing_amount, :status, :delivery_post_code, :payment_method, :delivery_address, :delivery_name)
+    params.require(:order).permit(:postage, :billing_amount, :status, :delivery_post_code, :payment_method, :delivery_address, :delivery_name, :making_status)
   end
 
   def address_params

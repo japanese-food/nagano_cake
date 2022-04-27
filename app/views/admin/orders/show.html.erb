@@ -1,13 +1,12 @@
 <div class ="row">
- <%= form_for(@order, url:admin_order_path(@order), method: :put) do |f| %> 
   <h2>注文履歴詳細</h2>
-      
+
          <table>
-             
+
              <tr>
                  <th>購入者</th>
                  <td>
-                     <%= @order.name %>
+                    <%= @order.customer.sur_name %><%= @order.customer.first_name %>
                  </td>
              </tr>
              <tr>
@@ -16,7 +15,7 @@
              </tr>
              <tr>
                  <th>配送先</th>
-                 <td> 
+                 <td>
                      <%= @order.delivery_post_code %>
                      <%= @order.delivery_address %><br>
                      <%= @order.delivery_name %>
@@ -27,17 +26,19 @@
                  <td> <%= @order.payment_method %></td>
              </tr>
              <tr>
-                
+
                  <th>注文ステータス</th>
                  <td>
+                    <%= form_with model: @order, url: admin_order_path, method: :patch do |f| %>
                      <%= f.select :status, Order.statuses.keys %>
                      <%= f.submit "更新" %>
+                    <% end %>
                  </td>
              </tr>
          </table>
 
 
-    
+
         <table>
             <thead>
                 <tr>
@@ -49,34 +50,37 @@
                 </tr>
             </thead>
             <tbody>
-                 <%  @order_details.each do |order_detail| %>
+              <% @order_details.each do |order_detail| %>
                 <tr>
                     <td><%= order_detail.product.name %></td>
-                    <td><%= tax_price(order_detail.product.tax_out_price).to_s(:delimited) %></td>
-                    <td><%= order_detail.quantity %></td></td>
-                    <td><%= sub_price(order_detail).to_s(:delimited) %></td>
+                    <td><%= order_detail.product.price %></td>
+                    <td><%= order_detail.amount %></td></td>
+                    <td><%= order_detail.subtotal %></td>
                     <td>
-                        <%= f.select :making_status, Order_detail.making_statuses.keys %>
+                  <%= form_with model: @order_details, url: admin_order_order_detail_path(@order_details), method: :patch do |f| %>
+                        <%= f.select :making_status, OrderDetail.making_statuses.keys %>
                         <%= f.submit "更新" %>
+                  <% end %>
                     </td>
-                 <% end %>
+              <% end %>
                 </tr>
             </tbody>
         </table>
-                
+
         <table>
             <tr>
               <th>商品合計</th>
-              <td><%= total_price(@order_details).to_s(:delimited) %></td>
+              <% @order_details.each do |order_detail| %>
+              <td><%= @total_price += order_detail.subtotal %></td>
+              <% end %>
             </tr>
             <tr>
               <th>送料</th>
-              <td><%= @order.postage.to_s(:delimited) %></td>
+              <td><%= @order.postage%></td>
             </tr>
             <tr>
               <th>請求金額合計</th>
-              <td><%= @order.total_price.to_s(:delimited) %></td>
+              <td><%= @total_price + @order.postage %></td>
             </tr>
     　　</table>
- <% end %>           
 </div>
