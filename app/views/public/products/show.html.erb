@@ -1,8 +1,8 @@
-<%= image_tag @product.get_image(300, 300) %>
+<span><%= image_tag @product.get_image(300, 300) %></span>
 
-<h1><%= @product.name %></h1>
+<h3><%= @product.name %></h3>
 
-<h4><%= @product.caption %></h4>
+<h6><%= @product.caption %></h6>
 <br>
 <h4><%= number_to_currency(@product.with_tax_price, strip_insignificant_zeros: true, :unit => "￥") %>(税込み)</h4>
 
