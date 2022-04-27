@@ -2,9 +2,9 @@
     <div class ="row">
       <div class="col-xs-10">
           <h2>注文履歴詳細</h2>
-        
+
                  <table>
-        
+
                      <tr>
                          <th>購入者</th>
                          <td>
@@ -25,22 +25,22 @@
                      </tr>
                      <tr>
                          <th>支払方法</th>
-                         <td> <%= @order.payment_method %></td>
+                         <td> <%= @order.payment_method_i18n %></td>
                      </tr>
                      <tr>
-        
+
                          <th>注文ステータス</th>
                          <td>
                             <%= form_with model: @order, url: admin_order_path, method: :patch do |f| %>
-                             <%= f.select :status, Order.statuses.keys %>
+                             <%= f.select :status, Order.statuses.keys.map {|k| [I18n.t("enums.order.status.#{k}"), k]} %>
                              <%= f.submit "更新" %>
                             <% end %>
                          </td>
                      </tr>
                  </table>
-        
-        
-        
+
+
+
                 <table>
                     <thead>
                         <tr>
@@ -60,7 +60,7 @@
                             <td><%= order_detail.subtotal %></td>
                             <td>
                           <%= form_with model: order_detail, url: admin_order_detail_path(order_detail), method: :patch do |f| %>
-                                <%= f.select :making_status, OrderDetail.making_statuses.keys %>
+                                <%= f.select :making_status, OrderDetail.making_statuses.keys.map {|k| [I18n.t("enums.order_detail.making_status.#{k}"), k]} %>
                                 <%= f.submit "更新" %>
                           <% end %>
                             </td>
@@ -68,7 +68,7 @@
                         </tr>
                     </tbody>
                 </table>
-        
+
                 <table>
                     <tr>
                       <th>商品合計</th>
