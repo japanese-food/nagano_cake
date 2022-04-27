@@ -32,15 +32,16 @@
         <table>
             <tr>
                 <th>商品合計</th>
-                <td><%#= total_price(@order_details).to_s(:delimited) %></td>
+                <td><%= number_to_currency(@order.billing_amount, strip_insignificant_zeros: true, :unit => "￥") %></td>
             </tr>
             <tr>
                 <th>配送料</th>
-                <td><%#= @order.postage.to_s(:delimited) %></td>
+                <td><%= number_to_currency(@order.postage, strip_insignificant_zeros: true, :unit => "￥") %></td>
             </tr>
             <tr>
+              <% @order_price += @order.postage %>
                 <th>ご請求額</th>
-                <td><%#= @order.total_price.to_s(:delimited) %></td>
+                <td><%= number_to_currency(@order_price + @order.billing_amount, strip_insignificant_zeros: true, :unit => "￥") %></td>
             </tr>
         </table>
 </div>
@@ -61,9 +62,10 @@
           <% @order_details.each do |order_detail| %>
           <tr>
               <td><%= order_detail.product.name %></td>
-              <td><%#= tax_price(order_detail.product.tax_out_price).to_s(:delimited) %></td>
+              <td><%= number_to_currency(order_detail.product.with_tax_price, strip_insignificant_zeros: true, :unit => "￥") %></td>
               <td><%= order_detail.amount %></td>
-              <td><%#= sub_price(order_detail).to_s(:delimited) %></td>
+              <% @total_price += order_detail.product.with_tax_price %>
+              <td><%= number_to_currency(@total_price*order_detail.amount, strip_insignificant_zeros: true, :unit => "￥") %></td>
           </tr>
           <% end %>
       </tbody>
