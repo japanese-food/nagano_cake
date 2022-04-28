@@ -2,9 +2,9 @@
     <div class ="row">
       <div class="col-xs-10">
           <h2>注文履歴詳細</h2>
-        
+
                  <table>
-        
+
                      <tr>
                          <th>購入者</th>
                          <td>
@@ -28,7 +28,7 @@
                          <td> <%= @order.payment_method %></td>
                      </tr>
                      <tr>
-        
+
                          <th>注文ステータス</th>
                          <td>
                             <%= form_with model: @order, url: admin_order_path, method: :patch do |f| %>
@@ -38,9 +38,9 @@
                          </td>
                      </tr>
                  </table>
-        
-        
-        
+
+
+
                 <table>
                     <thead>
                         <tr>
@@ -55,9 +55,9 @@
                       <% @order_details.each do |order_detail| %>
                         <tr>
                             <td><%= order_detail.product.name %></td>
-                            <td><%= order_detail.product.price %></td>
+                            <td><%= number_to_currency(order_detail.product.price, strip_insignificant_zeros: true, :unit => "￥") %></td>
                             <td><%= order_detail.amount %></td></td>
-                            <td><%= order_detail.subtotal %></td>
+                            <td><%= number_to_currency(order_detail.subtotal, strip_insignificant_zeros: true, :unit => "￥") %></td>
                             <td>
                           <%= form_with model: order_detail, url: admin_order_detail_path(order_detail), method: :patch do |f| %>
                                 <%= f.select :making_status, OrderDetail.making_statuses.keys %>
@@ -68,21 +68,21 @@
                         </tr>
                     </tbody>
                 </table>
-        
+
                 <table>
                     <tr>
                       <th>商品合計</th>
                       <% @order_details.each do |order_detail| %>
-                      <td><%= @total_price += order_detail.subtotal %></td>
+                      <td><%= number_to_currency(@total_price += order_detail.subtotal, strip_insignificant_zeros: true, :unit => "￥") %></td>
                       <% end %>
                     </tr>
                     <tr>
                       <th>送料</th>
-                      <td><%= @order.postage%></td>
+                      <td><%= number_to_currency(@order.postage, strip_insignificant_zeros: true, :unit => "￥")%></td>
                     </tr>
                     <tr>
                       <th>請求金額合計</th>
-                      <td><%= @total_price + @order.postage %></td>
+                      <td><%= number_to_currency(@total_price + @order.postage, strip_insignificant_zeros: true, :unit => "￥") %></td>
                     </tr>
             　　</table>
       </div>
