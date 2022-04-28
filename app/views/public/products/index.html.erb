@@ -4,7 +4,7 @@
 
         <h1>商品一覧(全<%= Product.all.count %>件)</h1>
 
-      <div class="d-flex flex-nowwrap">
+      <div class="d-flex flex-wrap">
 
             <% @products.each do |product| %>
             <div class="card">
