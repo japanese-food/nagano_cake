@@ -2,17 +2,17 @@
      <div class="row">
        <div class="col-xs-7">
         <h2>注文情報入力</h2>
-           <br>
-           <br>
-        <h3>支払方法</h3>
-        <%= form_with model: @order, url: orders_check_path, method: :post, local: true do |f| %>
-
+        <br>
+          <div>
+            <h3>支払方法</h3>
+            <%= form_with model: @order, url: orders_check_path, method: :post, local: true do |f| %>
             <%= f.radio_button :payment_method, Order.payment_methods.key(0) %>
             <%= f.label :payment_method, Order.payment_methods_i18n[:credit_card] %>
             <br>
             <%= f.radio_button :payment_method, Order.payment_methods.key(1) %>
             <%= f.label :payment_method, Order.payment_methods_i18n[:transfer] %>
-            <br>
+          </div>
+          <div>
             <h3>お届け先</h3>
             <div>
                 <%= f.radio_button :address_number, 1 %>
@@ -29,15 +29,37 @@
             </div>
               <br>
             <div>
+
                 <%= f.radio_button :address_number, 3 %>
                 <%= f.label :address_number_2, "新しいお届け先" %>
                 <br>
-                <%= f.label :郵便番号（ハイフンなし） %>
-                <%= f.text_field :delivery_post_code %><br>
-                <%= f.label :住所 %>
-                <%= f.text_field :delivery_address %><br>
-                <%= f.label :宛名 %>
-                <%= f.text_field :delivery_name %>
+
+                <table>
+                  <tr>
+                    <th>
+                      <%= f.label :郵便番号（ハイフンなし） %>
+                    </th>
+                    <td>
+                      <%= f.text_field :delivery_post_code %><br>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>
+                      <%= f.label :住所 %>
+                    </th>
+                    <td>
+                      <%= f.text_field :delivery_address %>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>
+                      <%= f.label :宛名 %>
+                    </th>
+                    <td>
+                      <%= f.text_field :delivery_name %>
+                    </td>
+                  </tr>
+                </table>
             </div>
             <br>
             <%= f.submit "確認画面へ進む", class:"btn btn-primary" %>
