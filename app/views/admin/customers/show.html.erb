@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-8">
+
+            <h2><%= @customer.sur_name %><%= @customer.first_name %>さんの会員情報</h2>
+            <br>
+            <br>
+            <%= render 'show', customer: @customer %>
+            <br>
+          
+            <%= link_to "編集する", edit_admin_customer_path, class:"btn btn-success" %>
+            <%= link_to "注文履歴一覧を見る", admin_customers_path, class:"btn btn-primary" %>
+          
+    </div>
+  </div>
+ </div>

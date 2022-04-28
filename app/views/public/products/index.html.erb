@@ -1,0 +1,27 @@
+<div class="container">
+ <div class ="row" >
+   <div class="col-md-9 off-set-3">
+
+        <h1>商品一覧(全<%= Product.all.count %>件)</h1>
+
+      <div class="d-flex flex-wrap">
+
+            <% @products.each do |product| %>
+            <div class="card">
+          <%= link_to product_path(product) do %>
+                <%= image_tag product.get_image(200, 200) %>
+          <% end %>
+
+
+            <div class="card-body text-center">
+              <%= link_to product.name, product_path(product) %>
+            </div>
+            <div class="card-body text-center">
+            <%= number_to_currency(product.price, strip_insignificant_zeros: true, :unit => "￥")  %>
+            </div>
+
+          </div>
+        <% end %>
+    </div>
+ </div>
+</div>
